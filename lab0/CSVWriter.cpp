@@ -1,6 +1,5 @@
 #include "CSVWriter.h"
 #include <fstream>
-#include <iomanip>
 
 void CSVWriter::writeToFile(const std::string& filename, const std::vector<std::pair<std::string, int>>& data, int totalWords) {
     std::ofstream outputFile(filename);

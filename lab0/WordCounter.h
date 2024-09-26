@@ -1,7 +1,6 @@
 #ifndef WORDCOUNTER_H
 #define WORDCOUNTER_H
 
-#include <string>
 #include <map>
 #include <list>
 #include <vector>

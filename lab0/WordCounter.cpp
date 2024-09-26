@@ -1,7 +1,5 @@
 #include "WordCounter.h"
 #include <fstream>
-#include <algorithm>
-#include <cctype>
 #include <vector>
 
 bool WordCounter::isDelimiter(char c) {

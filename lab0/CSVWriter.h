@@ -1,7 +1,6 @@
 #ifndef CSVWRITER_H
 #define CSVWRITER_H
 
-#include <string>
 #include <vector>
 
 class CSVWriter {
