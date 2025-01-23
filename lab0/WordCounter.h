@@ -4,6 +4,7 @@
 #include <map>
 #include <list>
 #include <vector>
+#include <string>
 
 class WordCounter {
 private:
@@ -11,9 +12,10 @@ private:
     int totalWords{0};
     bool isDelimiter(char c);
     std::list<std::string> splitIntoWords(const std::string& line);
+
 public:
-    void countWordsFromFile(const std::string& filename);
-    std::vector<std::pair<std::string, int>> getSortedWord() const;
+    void countWords(const std::list<std::string>& lines);
+    std::vector<std::pair<std::string, int>> getSortedWords() const;
     int getTotalWords() const;
 };
 

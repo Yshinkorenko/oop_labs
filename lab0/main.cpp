@@ -1,21 +1,30 @@
 #include <iostream>
+#include "Reader.h"
 #include "WordCounter.h"
 #include "CSVWriter.h"
 
 int main(int argc, char* argv[]) {
     if (argc != 3) {
-        std::cerr << "Write: " << argv[0] << " in.txt out.csv" << std::endl;
+        std::cerr << "Usage: " << argv[0] << " <input.txt> <output.csv>" << std::endl;
         return 1;
     }
 
-    WordCounter wordCounter;
-    WordCounter wordCounter2 = new WordCounter;
-    wordCounter.countWordsFromFile(argv[1]);
 
-    std::vector<std::pair<std::string, int>> sortedWords = wordCounter.getSortedWord();
-    int totalWords = wordCounter.getTotalWords();
+    try {
+        Reader reader;
+        auto lines = reader.readFromFile(argv[1]);
 
-    CSVWriter::writeToFile(argv[2], sortedWords, totalWords);
+        WordCounter wordCounter;
+        wordCounter.countWords(lines);
+
+        auto sortedWords = wordCounter.getSortedWords();
+        int totalWords = wordCounter.getTotalWords();
+
+        CSVWriter::writeToFile(argv[2], sortedWords, totalWords);
+    } catch (const std::exception& e) {
+        std::cerr << e.what() << std::endl;
+        return 1;
+    }
 
     return 0;
 }

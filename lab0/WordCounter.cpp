@@ -1,14 +1,15 @@
 #include "WordCounter.h"
-#include <fstream>
-#include <vector>
+#include <cctype>
+#include <algorithm>
 
 bool WordCounter::isDelimiter(char c) {
-    return !std::isalnum(c);
+    return !std::isalnum(static_cast<unsigned char>(c));
 }
 
 std::list<std::string> WordCounter::splitIntoWords(const std::string& line) {
     std::list<std::string> words;
     std::string word;
+
     for (char c : line) {
         if (isDelimiter(c)) {
             if (!word.empty()) {
@@ -16,34 +17,28 @@ std::list<std::string> WordCounter::splitIntoWords(const std::string& line) {
                 word.clear();
             }
         } else {
-            word += std::tolower(c);
+            word += static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
         }
     }
+
     if (!word.empty()) {
         words.push_back(word);
     }
+
     return words;
 }
 
-void WordCounter::countWordsFromFile(const std::string& filename) {
-    std::ifstream inputFile(filename);
-    if (!inputFile.is_open()) {
-        throw std::runtime_error("Error: Could not open input file.");
-    }
-
-    std::string line;
-    while (std::getline(inputFile, line)) {
-        std::list<std::string> words = splitIntoWords(line);
-        for (const std::string& word : words) {
+void WordCounter::countWords(const std::list<std::string>& lines) {
+    for (const auto& line : lines) {
+        auto words = splitIntoWords(line);
+        for (const auto& word : words) {
             wordCount[word]++;
             totalWords++;
         }
     }
-
-    inputFile.close();
 }
 
-std::vector<std::pair<std::string, int>> WordCounter::getSortedWord() const {
+std::vector<std::pair<std::string, int>> WordCounter::getSortedWords() const {
     std::vector<std::pair<std::string, int>> sortedWords(wordCount.begin(), wordCount.end());
     std::sort(sortedWords.begin(), sortedWords.end(), [](const auto& a, const auto& b) {
         return a.second > b.second;
