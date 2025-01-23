@@ -1,0 +1,3 @@
+LoggingObserver received: CustomEvent [id: 777, type: Human, payload: Сan walk]
+LoggingObserver received: CustomEvent [id: 777, type: Human, payload: Can walk]
+LoggingObserver received: CustomEvent [id: 777, type: Human, payload: Can walk]
