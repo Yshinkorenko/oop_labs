@@ -1,0 +1,3 @@
+LoggingObserver received: Hello, my favorite Observer!
+LoggingObserver received: Hello, my favorite Observer!
+LoggingObserver received: Hello, my favorite Observer!
