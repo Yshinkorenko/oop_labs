@@ -4,6 +4,7 @@
 **/.vscode
 **/build
 **/.build
+**/googletest
 
 # Prerequisites
 *.d
